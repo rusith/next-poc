@@ -1,0 +1,25 @@
+name: Deploy Site
+on:
+  push:
+    branches: ["*"]
+jobs:
+  deploy:
+    name: Deploy the website
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Node JS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Do the Deployment
+        run: |
+          npm install
+          export NODE_ENV=production
+          npm run build
+          npm run export
+          git status
+          
