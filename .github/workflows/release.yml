@@ -1,7 +1,7 @@
 name: Deploy Site
 on:
   push:
-    branches: ["*"]
+    branches: ["master"]
 jobs:
   deploy:
     name: Deploy the website
@@ -22,7 +22,7 @@ jobs:
           npm run build
           npm run export
           git checkout -b release
-          git pull
+          git pull origin release
           rm -v -rf !(".git"|"out")
           cp -a ./out/. ./
           rm -rf ./out
