@@ -11,6 +11,9 @@ jobs:
         python-version: ["3.8"]
     steps:
       - uses: actions/checkout@v1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - name: Setup Node JS
         uses: actions/setup-node@v1
         with:
@@ -31,5 +34,10 @@ jobs:
           git add .
           git commit -m "${{github.event.head_commit.message}}" .
           git push origin release
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release
 
           
