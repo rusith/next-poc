@@ -23,7 +23,7 @@ jobs:
           npm run export
           git checkout -b release
           git pull origin release
-          rm -v -rf !\(".git"|"out"\)
+          rm -v -rf !\(\".git\"|\"out\"\)
           cp -a ./out/. ./
           rm -rf ./out
           git commit -m "${{github.event.head_commit.message}}"
